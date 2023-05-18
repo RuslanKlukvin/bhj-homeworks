@@ -1,63 +1,39 @@
-let buttons = document.querySelectorAll('.slider__arrow');
-slides = Array.from(document.querySelectorAll('.slider__item'))
-slidesCount = slides.length
-let dots = document.querySelectorAll('.slider__dot');
+function showSlide(numberSlide) {
+  let showSlideNumber = sliderItem.findIndex((number, index, arr) => arr[index].classList.contains('slider__item_active') === true);
+  sliderItem[showSlideNumber].classList.remove('slider__item_active');
+  sliderDot[showSlideNumber].classList.remove('slider__dot_active');
+  if (numberSlide > sliderItem.length - 1) {
+    numberSlide = 0;
+  }
+  if (numberSlide < 0) {
+    numberSlide = sliderItem.length - 1;
+  }
+  sliderItem[numberSlide].classList.add('slider__item_active');
+  sliderDot[numberSlide].classList.add('slider__dot_active');
+}
 
-function showSlides(direction) {
-    
-    activeIndex = slides.findIndex((element) => {
-      if (element.classList.contains('slider__item_active') == true) {
-        return true
-      }
-    });
-    console.log(activeIndex);
-    let nextIndex
-    if (direction == 1) {
-      if (activeIndex == slidesCount - 1) {
-        nextIndex = 0;
-        } else {
-          nextIndex = activeIndex + 1;
-        }
-        
-    } else {
-      if (activeIndex == 0) {
-        nextIndex = slidesCount - 1;
-        } else {
-          nextIndex = activeIndex - 1;
-        } 
-    }
-      slides[activeIndex].classList.remove('slider__item_active');
-      slides[nextIndex].classList.add('slider__item_active');
-      dots[activeIndex].classList.remove('slider__dot_active');
-      dots[nextIndex].classList.add('slider__dot_active');
-      console.log(nextIndex);
-    }
+function prev() {
+  let showSlideNumber = sliderItem.findIndex((number, index, arr) => arr[index].classList.contains('slider__item_active') === true);
+  showSlideNumber--;
+  showSlide(showSlideNumber);
+}
 
-      buttons.forEach((element, index) => {
-        element.addEventListener('click', () => {
-          showSlides(index)   
-    })
-})
+function next() {
+  let showSlideNumber = sliderItem.findIndex((number, index, arr) => arr[index].classList.contains('slider__item_active') === true);
+  showSlideNumber++;
+  showSlide(showSlideNumber)
+}
 
-dots.forEach((element, index) => {
-  element.addEventListener('click', () => {
-    showDot(index)   
-    })
-})
+const sliderItem = [...document.querySelectorAll('.slider__item')];
+const sliderDot = [...document.querySelectorAll('.slider__dot')];
+const prevBtn = document.querySelector('.slider__arrow_prev');
+const nextBtn = document.querySelector('.slider__arrow_next');
 
-function showDot(index) {
-  slides.forEach((element, i) => {
-    if (index == i) {
-      element.classList.add('slider__item_active'); 
-      } else {
-        element.classList.remove('slider__item_active');
-      }
-    })
-    dots.forEach((element, i) => {
-      if (index == i) {
-        element.classList.add('slider__dot_active'); 
-        } else {
-          element.classList.remove('slider__dot_active');
-        }
-    })
+prevBtn.onclick = prev;
+nextBtn.onclick = next;
+
+for (let i in sliderDot) {
+  sliderDot[i].onclick = () => {
+    showSlide(i);
+  };
 }
