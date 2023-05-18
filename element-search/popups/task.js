@@ -1,15 +1,16 @@
-let modalMain = document.getElementById('modal_main');
-let modalClose = Array.from(document.getElementsByClassName('modal__close'));
-let showSuccess = document.querySelector('.show-success');
-let modalSuccess = document.getElementById('modal_success');
+const main = window.modal_main;
+const success = window.modal_success;
+const show = document.querySelector(".show-success");
+const allClose = document.querySelectorAll("div.modal__close");
 
-modalMain.classList.add('modal_active');
+main.classList.add("modal_active");
 
-modalClose.forEach(item => item.onclick = function() {
-  modalMain.classList.remove('modal_active');
-    modalSuccess.classList.remove('modal_active');
-});
-
-showSuccess.onclick = function() {
-  modalSuccess.classList.add('modal_active');
-};
+show.onclick = () => {
+  main.classList.remove("modal_active");
+  success.classList.add("modal_active");
+}
+allClose.forEach(item => {
+  item.onclick = () => {
+     item.closest('.modal').classList.remove('modal_active') // удалить
+  }
+})

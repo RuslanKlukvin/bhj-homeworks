@@ -5,8 +5,8 @@ let dots = document.querySelectorAll('.slider__dot');
 
 function showSlides(direction) {
     
-    activeIndex = slides.findIndex((elem) => {
-      if (elem.classList.contains('slider__item_active') == true) {
+    activeIndex = slides.findIndex((element) => {
+      if (element.classList.contains('slider__item_active') == true) {
         return true
       }
     });
@@ -33,31 +33,31 @@ function showSlides(direction) {
       console.log(nextIndex);
     }
 
-      buttons.forEach((elem, index) => {
-        elem.addEventListener('click', () => {
+      buttons.forEach((element, index) => {
+        element.addEventListener('click', () => {
           showSlides(index)   
     })
 })
 
-dots.forEach((elem, index) => {
-  elem.addEventListener('click', () => {
+dots.forEach((element, index) => {
+  element.addEventListener('click', () => {
     showDot(index)   
     })
 })
 
 function showDot(index) {
-  slides.forEach((elem, i) => {
+  slides.forEach((element, i) => {
     if (index == i) {
-      elem.classList.add('slider__item_active'); 
+      element.classList.add('slider__item_active'); 
       } else {
-        elem.classList.remove('slider__item_active');
+        element.classList.remove('slider__item_active');
       }
     })
-    dots.forEach((elem, i) => {
+    dots.forEach((element, i) => {
       if (index == i) {
-        elem.classList.add('slider__dot_active'); 
+        element.classList.add('slider__dot_active'); 
         } else {
-          elem.classList.remove('slider__dot_active');
+          element.classList.remove('slider__dot_active');
         }
     })
 }
