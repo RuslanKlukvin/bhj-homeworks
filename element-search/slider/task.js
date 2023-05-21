@@ -37,3 +37,10 @@ for (let i in sliderDot) {
     showSlide(i);
   };
 }
+
+dotsList.array.forEach((element, index) => {
+  element.onclick = () => {
+    clearActiveClass();
+    addActiveClass(index);
+  };
+});
